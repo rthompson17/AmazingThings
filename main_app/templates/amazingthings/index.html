@@ -1,18 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Amazingthing List</h1>
+<h1>Amazing Things List</h1>
 
 {% for amazingthing in amazingthings %}
   <div class="card">
     <div class="card-content">
       <span class="card-title">{{ amazingthing.name }}</span>
-      <p>Breed: {{ amazingthing.breed }}</p>
-      <p>Description: {{ amazingthing.description }}</p>
+      <h6>Location: {{ amazingthing.location }}</h6>
+      <p><strong>How many years has it been there? </strong> {{ amazingthing.age }}</p>
+      <p><strong>What is it?</strong> {{ amazingthing.description }}</p>
       {% if amazingthing.age > 0 %}
-        <p>Age: {{ amazingthing.age }}</p>
       {% else %}
-        <p>Age: Kitten</p>
+        <p><strong>Age:</strong> Unknown</p>
       {% endif %}
     </div>
   </div>
