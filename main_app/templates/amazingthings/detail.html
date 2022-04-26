@@ -1,23 +1,41 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Amazing Thing Details</h1>
+<h1>amazingthing Details</h1>
 
-<div class="card">
-  <div class="card-content">
-    <span class="card-title">{{ amazingthing.name }}</span>
-    <p>Location: {{ amazingthing.location }}</p>
-    <p>Description: {{ amazingthing.description }}</p>
-    {% if amazingthing.age > 0 %}
-      <p>Age: {{ amazingthing.age }}</p>
-    {% else %}
-      <p>Age: Unknown</p>
-    {% endif %}
+<div class="row">
+  <div class="col s6">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">{{ amazingthing.name }}</span>
+        <p>Name: {{ amazingthing.name }}</p>
+        <p>Location: {{ amazingthing.location }}</p>
+        {% if amazingthing.age > 0 %}
+          <p>Description: {{ amazingthing.description }}</p>
+        {% else %}
+          <p>Age: Unknown</p>
+        {% endif %}
+      </div>
+      <div class="card-action">
+        <a href="{% url 'things_update' amazingthing.id %}">Edit</a>
+        <a href="{% url 'things_delete' amazingthing.id %}">Delete</a>
+      </div>
+    </div>
   </div>
-  <div class="card-action">
-    <a href="{% url 'things_update' amazingthing.id %}">Edit</a>
-    <a href="{% url 'things_delete' amazingthing.id %}">Delete</a>
+  <div class="col s6">
+    <table class="striped">
+      <thead>
+        <tr><th>Date</th><th>Event</th></tr>
+      </thead>
+      <tbody>
+        {% for events in amazingthing.events_set.all %}
+          <tr>
+            <td>{{events.date}}</td>
+            <td>{{events.get_type_display}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
 </div>
-
 {% endblock %}
