@@ -1,9 +1,10 @@
+from asyncio import events
 from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.http import HttpResponse
 
 from .models import Thing
-
+from .forms import EventsForm
 
 # Create your views here.
 class ThingCreate(CreateView):
@@ -29,6 +30,7 @@ def amazingthings_index(request):
     return render(request, 'amazingthings/index.html', { 'amazingthings': amazingthings })
 
 def amazingthings_detail(request, thing_id):
-  print(thing_id)
   amazingthing = Thing.objects.get(id=thing_id)
-  return render(request, 'amazingthings/detail.html', { 'amazingthing': amazingthing })
+  events_form = EventsForm() #generating the Events form
+
+  return render(request, 'amazingthings/detail.html', { 'amazingthing': amazingthing, 'events_form': events_form })
