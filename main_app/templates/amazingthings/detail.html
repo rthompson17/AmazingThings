@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Amazing Thing Details</h1>
+
+<div class="card">
+  <div class="card-content">
+    <span class="card-title">{{ amazingthing.name }}</span>
+    <p>Location: {{ amazingthing.location }}</p>
+    <p>Description: {{ amazingthing.description }}</p>
+    {% if amazingthing.age > 0 %}
+      <p>Age: {{ amazingthing.age }}</p>
+    {% else %}
+      <p>Age: Unknown</p>
+    {% endif %}
+  </div>
+  <div class="card-action">
+    <a href="{% url 'things_update' amazingthing.id %}">Edit</a>
+    <a href="{% url 'things_delete' amazingthing.id %}">Delete</a>
+  </div>
+</div>
+
+{% endblock %}
