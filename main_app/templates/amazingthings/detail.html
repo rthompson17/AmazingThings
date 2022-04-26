@@ -24,7 +24,7 @@
   </div>
   <div class="col s6">
 
-    <form method="post">
+    <form method="post" action="{% url 'add_events' amazingthing.id %}">
         {% csrf_token %}
         {{ events_form.as_p }}
         <input type="submit" class="btn" value="Add Event">

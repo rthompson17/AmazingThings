@@ -9,4 +9,6 @@ urlpatterns = [
     path('amazingthings/create/', views.ThingCreate.as_view(), name='things_create'),
     path('amazingthings/<int:pk>/update/', views.ThingUpdate.as_view(), name='things_update'),
     path('amazingthings/<int:pk>/delete/', views.ThingDelete.as_view(), name='things_delete'),
+    path('amazingthings/<int:thing_id>/add_events/', views.add_events, name='add_events'),
+
 ]
