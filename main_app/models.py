@@ -22,20 +22,20 @@ TYPES = (
 )
 
 class Events(models.Model):
-  date = models.DateField()
-  type = models.CharField(
-    max_length=1,
-    # add the 'choices' field option
-    choices=TYPES,
-    # set the default value for meal to be 'B'
-    default=TYPES[0][0]
-  )
+    date = models.DateField()
+    type = models.CharField(
+        max_length=1,
+        # add the 'choices' field option
+        choices=TYPES,
+        # set the default value for meal to be 'B'
+        default=TYPES[0][0]
+    )
 
 # Create a thing ForeignKey (in psql)
-thing = models.ForeignKey(Thing, on_delete=models.CASCADE)
+    thing = models.ForeignKey(Thing, on_delete=models.CASCADE)
 
-def __str__(self):
-      return f"{self.get_type_display()} on {self.date}"
+    def __str__(self):
+        return f"{self.get_type_display()} on {self.date}"
 
-      class Meta:
-         ordering = ['-date']
+        class Meta:
+             ordering = ['-date']
