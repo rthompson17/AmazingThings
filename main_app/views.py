@@ -30,20 +30,12 @@ def amazingthings_index(request):
     amazingthings = Thing.objects.all()
     return render(request, 'amazingthings/index.html', { 'amazingthings': amazingthings })
 
-
-# def amazingthings_detail(request, thing_id):
-#   amazingthing = Thing.objects.get(id=thing_id)
-#   events_form = EventsForm() #generating the Events form
-#   return render(request, 'amazingthings/detail.html', { 'amazingthing': amazingthing, 'events_form': events_form })
-
 def amazingthings_detail(request, thing_id):
   amazingthing = Thing.objects.get(id=thing_id)
-  # Get the toys the cat doesn't have
   programs_thing_doesnt_have = Program.objects.exclude(id__in = amazingthing.programs.all().values_list('id')) #try thing.programs
   events_form = EventsForm()
   return render(request, 'amazingthings/detail.html', {
     'amazingthing': amazingthing, 'events_form': events_form,
-    # Add the toys to be displayed
     'programs': programs_thing_doesnt_have
   })
 
@@ -52,10 +44,7 @@ def add_events(request, thing_id):
     form = EventsForm(request.POST)
 
     if form.is_valid():
-    # don't save the form to the db until it
-    # has the cat_id assigned
       new_events = form.save(commit=False)
-      #look at the note for the thing field in the Event model
       new_events.thing_id = thing_id
       new_events.save()
     return redirect('detail', thing_id=thing_id)
@@ -65,8 +54,6 @@ def add_events(request, thing_id):
 def assoc_program(request, thing_id, program_id):
   Thing.objects.get(id=thing_id).programs.add(program_id)
   return redirect('detail', thing_id=thing_id)
-
-
 
 
 
