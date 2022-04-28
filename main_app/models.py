@@ -1,15 +1,28 @@
 from django.db import models
 from django.urls import reverse
 
+class Program(models.Model):
+    name = models.CharField(max_length=100)
+    kind = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('programs_detail', kwargs={'pk': self.id})
+
+
+
 # Create your models here.
 class Thing(models.Model):
     name = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
     description = models.CharField(max_length=450)
     age = models.IntegerField()
+    programs = models.ManyToManyField(Program)
     
     def __str__(self):
-      return f"The thing names {self.name} has id of {self.id}"
+      return f"Thing: {self.name} Id: {self.id}"
 
       # Add this method
     def get_absolute_url(self):

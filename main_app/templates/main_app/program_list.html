@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Program List</h1>
+
+{% for program in program_list %}
+  <a href="{% url 'programs_detail' program.id %}">
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title">{{ program.name }}</span>
+            <p>Kind: {{ program.color }}</p>
+        </div>
+    </div>
+  </a>
+{% endfor %}
+
+{% endblock %}

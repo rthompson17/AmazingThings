@@ -1,5 +1,4 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,8 +18,9 @@
           <li><a href="/" class="left brand-logo">&nbsp;&nbsp;Amazing Things</a></li>
         </ul>
         <ul class="right">
-         	<!-- <li><a href="/about">About</a></li> -->
 					<li><a href="{% url 'about' %}">About</a></li>
+          <li><a href="{% url 'programs_create' %}">Add A Program</a></li>
+					<li><a href="{% url 'programs_index' %}">View All Programs</a></li>
 					<li><a href="{% url 'index' %}">View All My Things</a></li>
 					<li><a href="{% url 'things_create' %}">Add A Thing</a></li>
         </ul>
@@ -35,4 +35,5 @@
     <div class="right">All Rights Reserved, &copy; 2022 Amazing Things &nbsp;</div>
   </footer>
 </body>
+
 </html>
