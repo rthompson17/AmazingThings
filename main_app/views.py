@@ -10,7 +10,7 @@ from .forms import EventsForm
 # Create your views here.
 class ThingCreate(CreateView):
   model = Thing
-  fields = '__all__'
+  fields = ['name', 'location', 'description', 'age']
 
 class ThingUpdate(UpdateView):
   model = Thing
