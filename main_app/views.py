@@ -31,22 +31,21 @@ def amazingthings_index(request):
     return render(request, 'amazingthings/index.html', { 'amazingthings': amazingthings })
 
 
-
-#
+# def amazingthings_detail(request, thing_id):
+#   amazingthing = Thing.objects.get(id=thing_id)
+#   events_form = EventsForm() #generating the Events form
+#   return render(request, 'amazingthings/detail.html', { 'amazingthing': amazingthing, 'events_form': events_form })
 
 def amazingthings_detail(request, thing_id):
   amazingthing = Thing.objects.get(id=thing_id)
-
-  programs_thing_doesnt_have = Program.objects.exclude(id__in = amazingthing.programs.all().values_list('id'))
+  # Get the toys the cat doesn't have
+  programs_thing_doesnt_have = Program.objects.exclude(id__in = amazingthing.programs.all().values_list('id')) #try thing.programs
   events_form = EventsForm()
   return render(request, 'amazingthings/detail.html', {
-      'amazingthings': amazingthing, 'events_form': events_form,
-      # Add the toys to be displayed
-      'programs': programs_thing_doesnt_have
+    'amazingthing': amazingthing, 'events_form': events_form,
+    # Add the toys to be displayed
+    'programs': programs_thing_doesnt_have
   })
-
-
-
 
 
 def add_events(request, thing_id):
@@ -61,9 +60,14 @@ def add_events(request, thing_id):
       new_events.save()
     return redirect('detail', thing_id=thing_id)
 
+
+
 def assoc_program(request, thing_id, program_id):
   Thing.objects.get(id=thing_id).programs.add(program_id)
   return redirect('detail', thing_id=thing_id)
+
+
+
 
 
 class ProgramList(ListView):
