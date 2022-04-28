@@ -30,11 +30,24 @@ def amazingthings_index(request):
     amazingthings = Thing.objects.all()
     return render(request, 'amazingthings/index.html', { 'amazingthings': amazingthings })
 
+
+
+#
+
 def amazingthings_detail(request, thing_id):
   amazingthing = Thing.objects.get(id=thing_id)
-  events_form = EventsForm() #generating the Events form
 
-  return render(request, 'amazingthings/detail.html', { 'amazingthing': amazingthing, 'events_form': events_form })
+  programs_thing_doesnt_have = Program.objects.exclude(id__in = amazingthing.programs.all().values_list('id'))
+  events_form = EventsForm()
+  return render(request, 'amazingthings/detail.html', {
+      'amazingthings': amazingthing, 'events_form': events_form,
+      # Add the toys to be displayed
+      'programs': programs_thing_doesnt_have
+  })
+
+
+
+
 
 def add_events(request, thing_id):
     form = EventsForm(request.POST)
@@ -56,7 +69,7 @@ def assoc_program(request, thing_id, program_id):
 class ProgramList(ListView):
   model = Program
 
-class ProgramDetail(DeleteView):
+class ProgramDetail(DetailView):
   model = Program
 
 class ProgramCreate(CreateView):
